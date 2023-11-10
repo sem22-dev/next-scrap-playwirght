@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const followerCount = await page.evaluate(() => {
       const followerCountElements = Array.from(document.querySelectorAll('.odometer-value')).slice(0, 9);
       return followerCountElements.map(element => element.textContent).join('');
-    });
+    }); 
 
     console.log(`Twitter Follower Count: ${followerCount}`);
 
