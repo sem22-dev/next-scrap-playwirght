@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "build-and-start": "npm run build && npm start",
-    "install-playwright": "npx playwright install",
-    "deploy": "concurrently \"npm run build-and-start\" \"npm run install-playwright\" && npm run dev"
+    "deploy": "concurrently \"npm run build-and-start\" \"npx playwright install\" && npm run dev"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
