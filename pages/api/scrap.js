@@ -38,7 +38,7 @@ async function scrapeTwitterFollowerCount() {
   }
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req, res) {
   try {
     const followerCount = await scrapeTwitterFollowerCount();
 
