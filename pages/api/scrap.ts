@@ -1,32 +1,55 @@
 
-// Import necessary modules
+// pages/api/twitter-follower-count.ts
 import { NextApiRequest, NextApiResponse } from 'next';
-import puppeteer from 'puppeteer';
+import { chromium } from 'playwright';
 
-// Export the Get function
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const browser = await puppeteer.launch({headless: false});
-  const page = await browser.newPage();
+async function scrapeTwitterFollowerCount() {
+  const browser = await chromium.launch({
+    headless: true,
+  });
+
+  const context = await browser.newContext({
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+  });
+
+  const page = await context.newPage();
 
   try {
-    await page.goto('https://livecounts.io/embed/twitter-live-follower-counter/Thotsem22');
-    
+    await page.setViewportSize({ width: 1366, height: 768 });
+
+    await page.goto('https://livecounts.io/embed/twitter-live-follower-counter/Thotsem22', { waitUntil: 'domcontentloaded', timeout: 0 });
+
     await page.waitForTimeout(5000);
 
     const followerCount = await page.evaluate(() => {
       const followerCountElements = Array.from(document.querySelectorAll('.odometer-value')).slice(0, 9);
       return followerCountElements.map(element => element.textContent).join('');
-    }); 
+    });
 
     console.log(`Twitter Follower Count: ${followerCount}`);
 
-    // Respond with the follower count or do something with the data
-    res.status(200).json({ followerCount });
+    return followerCount;
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    return null;
   } finally {
     // Close the browser
     await browser.close();
+  }
+}
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const followerCount = await scrapeTwitterFollowerCount();
+
+    if (followerCount !== null) {
+      // You can respond with the follower count or do something else with the data
+      res.status(200).json({ followerCount });
+    } else {
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 }
