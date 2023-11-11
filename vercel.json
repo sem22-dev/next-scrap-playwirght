@@ -3,21 +3,15 @@
     "version": 2,
     "builds": [
       {
-        "src": "api/scrap.ts",
+        "src": "api/scrap.js",
         "use": "@vercel/node",
         "config": {
           "includeFiles": ["package.json", "package-lock.json"]
-        },
-        "functions": {
-          "api/scrap.js": {
-            "runtime": "nodejs14.x",
-            "memory": 1024
-          }
         }
       }
     ],
     "routes": [
-      { "src": "/api/scrap", "dest": "api/scrap.ts" }
+      { "src": "/api/scrap", "dest": "api/scrap.js" }
     ],
     "env": {
       "VERCEL_ENV": "production"
