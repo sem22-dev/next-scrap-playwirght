@@ -8,7 +8,7 @@ import Hero from "@/components/hero";
 
 
 const getFollowerCount = async () => {
-  const res = await fetch(`https://scrap-puppeteer.vercel.app//api/scrap`);
+  const res = await fetch(`https://scrap-puppeteer.vercel.app/api/scrap`);
   const data = await res.json();
   return data;
 }
