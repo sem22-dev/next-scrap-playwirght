@@ -9,13 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "apexcharts": "^3.44.2",
     "cheerio": "^1.0.0-rc.12",
+    "install": "^0.13.0",
     "next": "14.0.1",
     "next-auth": "^4.24.5",
+    "npm": "^10.2.5",
+    "odometer": "^0.4.8",
     "playwright": "^1.39.0",
     "puppeteer": "^21.5.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-apexcharts": "^1.4.1",
+    "react-dom": "^18",
+    "react-spring": "^9.7.3",
+    "use-odometer": "^0.0.4"
   },
   "devDependencies": {
     "@types/node": "^20",
