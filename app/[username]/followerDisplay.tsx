@@ -203,12 +203,11 @@ function ChartContainer({ followerCount }: { followerCount: number | null }) {
     }, [followerCount]);
   
     return (
-      <div className="chart-container z-0">
+      <div className="chart-container max-w-screen z-0">
         <Chart
           options={chartData.options}
           series={chartData.series}
           type="area"
-          width="450"
         />
       </div>
     );
