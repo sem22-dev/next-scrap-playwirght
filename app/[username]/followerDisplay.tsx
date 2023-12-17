@@ -14,7 +14,7 @@ export default function DisplayFollowers({ username }: { username: string }) {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`http://34.228.218.163:8080/user-details?username=${username}`);
+      const response = await fetch(`https://54.196.45.15/user-details?username=${username}`);
       const data = await response.json();
       setFollowerCount(data.followerCount);
       setProfilePicUrl(data.profilePicUrl);
