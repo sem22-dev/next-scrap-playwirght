@@ -37,7 +37,7 @@ const FollowerCount = () => {
             <input
               type="text"
               value={username}
-              placeholder="Enter twitter username"
+              placeholder="Enter twitter username (eg: elonmusk)"
               onChange={handleUsernameChange}
               className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-400"
             />
